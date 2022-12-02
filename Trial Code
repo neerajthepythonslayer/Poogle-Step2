@@ -1,0 +1,46 @@
+## Installing and importing packages
+
+#Required Packages
+import pandas as pd
+import string
+import seaborn as sns
+import matplotlib.pyplot as plt
+import collections
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.sentiment import SentimentIntensityAnalyzer
+nltk.download('punkt')
+nltk.download('stopwords')
+
+#Run on Jupyter Notebook 
+
+#Import the Dataframe as a CSV File using Pandas
+poems_df = pd.read_csv(r'/Users/neerajtomsavio/Downloads/poems_df.csv')
+
+#Check the data
+poems_df.info()
+poems_df.head()
+
+##Cleaning the data
+
+#lowercase
+poems_df['clean_poems'] = poems_df['Stanzas'].str.lower()
+poems_df.head()
+
+#remove punctuation
+poems_df['clean_poems']= poems_df['clean_poems'].str.replace('[^\w\s]','')
+#Error encountered: /var/folders/mc/84k8761971x60fvw409r6hgm0000gn/T/ipykernel_6613/2724186450.py:2: FutureWarning: The default value of regex will change from True to False in a future version.
+  poems_df['clean_poems']= poems_df['clean_poems'].str.replace('[^\w\s]','')
+#Error only encountered in Juptyer, works fine on Colab 
+
+#Tokenisation
+#Type Error encountered 
+poems_df['clean_poems'] = poems_df['clean_poems'].apply(lambda x: ' '.join([word for word in x.split() if word not in (stop)]))
+
+lyrics.head()
+
+#Converted column values to string 
+poems_df['clean_poems'] = poems_df['clean_poems'].astype('string')
+poems_df['Stanzas'] = poems_df['Stanzas'].astype('string')
+print(poems_df.info())
+
