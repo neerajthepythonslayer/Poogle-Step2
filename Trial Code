@@ -35,8 +35,16 @@ poems_df['clean_poems']= poems_df['clean_poems'].str.replace('[^\w\s]','')
 
 #Tokenisation
 #Type Error encountered 
+
+#Removing Stop Words
+#Method 1 from NLTK
+from nltk.corpus import stopwords 
+stop = set(stopwords.words('english'))
 poems_df['clean_poems'] = poems_df['clean_poems'].apply(lambda x: ' '.join([word for word in x.split() if word not in (stop)]))
 
+#Method 2 Manual List
+stop = ['the', 'a', 'this', 'that', 'to', 'is', 'am', 'was', 'were', 'be', 'being', 'been']
+poems_df['clean_poems'] = poems_df['clean_poems'].apply(lambda x: ' '.join([word for word in x.split() if word not in (stop)]))
 lyrics.head()
 
 #Converted column values to string 
